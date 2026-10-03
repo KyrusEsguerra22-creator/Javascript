@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Calculator</title>
+
+    <style>
+      /* Page setup with pure white background */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      /* Outer box for the calculator */
+      .calculator {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 260px;
+        border: 1px solid black;
+      }
+
+      /* Screen display input */
+      #display {
+        width: 100%;
+        height: 100px;
+        font-size: 24px;
+        text-align: right;
+        margin-bottom: 15px;
+        padding: 5px 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        background-color: #ffffff;
+      }
+
+      /* Grid for keypad buttons */
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+
+      /* Basic button styling */
+      button {
+        height: 48px;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        background-color: #e2e8f0;
+        color: #333;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #cbd5e1;
+      }
+
+      /* Special button colors */
+      .operator {
+        background-color: #3b82f6;
+        color: white;
+      }
+
+      .operator:hover {
+        background-color: #2563eb;
+      }
+
+      .clear {
+        background-color: #ef4444;
+        color: white;
+      }
+
+      .clear:hover {
+        background-color: #dc2626;
+      }
+
+      .equal {
+        background-color: #22c55e;
+        color: white;
+      }
+
+      .equal:hover {
+        background-color: #16a34a;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <!-- Screen to show numbers and output -->
+      <input type="text" id="display" readonly />
+
+      <!-- Keypad buttons -->
+      <div class="buttons">
+        <button class="clear" onclick="clearDisplay()">C</button>
+        <button class="operator" onclick="appendValue('/')">÷</button>
+        <button class="operator" onclick="appendValue('*')">×</button>
+        <button class="operator" onclick="appendValue('-')">-</button>
+
+        <button onclick="appendValue('7')">7</button>
+        <button onclick="appendValue('8')">8</button>
+        <button onclick="appendValue('9')">9</button>
+        <button class="operator" onclick="appendValue('+')">+</button>
+
+        <button onclick="appendValue('4')">4</button>
+        <button onclick="appendValue('5')">5</button>
+        <button onclick="appendValue('6')">6</button>
+        <button class="equal" onclick="calculate()">=</button>
+
+        <button onclick="appendValue('1')">1</button>
+        <button onclick="appendValue('2')">2</button>
+        <button onclick="appendValue('3')">3</button>
+        <button onclick="appendValue('0')">0</button>
+      </div>
+    </div>
+
+    <script>
+      // 1. Function to add numbers or symbols to the screen
+      function appendValue(val) {
+        document.getElementById("display").value += val;
+      }
+
+      // 2. Function to clear the screen
+      function clearDisplay() {
+        document.getElementById("display").value = "";
+      }
+
+      // 3. Function to compute and calculate the answer
+      function calculate() {
+        try {
+          let expression = document.getElementById("display").value;
+          document.getElementById("display").value = eval(expression);
+        } catch (error) {
+          document.getElementById("display").value = "Error";
+        }
+      }
+    </script>
+  </body>
+</html>
